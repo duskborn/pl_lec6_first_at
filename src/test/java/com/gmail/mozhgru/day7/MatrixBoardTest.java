@@ -1,7 +1,7 @@
 package com.gmail.mozhgru.day7;
 
-import com.gmail.mozhgru.LoginPage;
-import com.gmail.mozhgru.MainPage;
+import com.gmail.mozhgru.annotationbased.LoginPage;
+import com.gmail.mozhgru.annotationbased.MainPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -29,8 +29,8 @@ public class MatrixBoardTest {
         loginPage.fillUsername("wrong_login");
         loginPage.fillPassword("wrong_pass");
         loginPage.submit();
-        MainPage mainPage = new MainPage(driver, "#login-failed");
-        Assert.assertEquals(mainPage.getTextOfElement("#login-failed"), "Неправильный логин или пароль.");
+        MainPage mainPage = new MainPage(driver);
+        Assert.assertEquals(mainPage.getTextOfElement(), "Неправильный логин или пароль.");
         loginPage.clearLogin();
     }
 
@@ -40,7 +40,7 @@ public class MatrixBoardTest {
         loginPage.fillUsername("user");
         loginPage.fillPassword("user");
         loginPage.submit();
-        MainPage mainPage = new MainPage(driver, "#profile span");
-        Assert.assertEquals(mainPage.getTextOfElement("#profile span"), "user");
+        MainPage mainPage = new MainPage(driver);
+        Assert.assertEquals(mainPage.getCurrentUser(), "user");
     }
 }
