@@ -16,13 +16,13 @@ public class TestNGExample {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    public void tryLogin(String login, String pass) {
+    private void tryLogin(String login, String pass) {
         driver.findElement(By.id("login-username")).sendKeys(login);
         driver.findElement(By.cssSelector("#login-password")).sendKeys(pass);
         driver.findElement(By.xpath("//*[@id=\"login-button\"]")).click();
     }
 
-    public void clearLogin() {
+    private void clearLogin() {
         driver.findElement(By.id("login-username")).clear();
         driver.findElement(By.cssSelector("#login-password")).clear();
     }
