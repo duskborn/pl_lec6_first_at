@@ -16,7 +16,7 @@ public class TestNGExample {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    public void loginTry(String login, String pass) {
+    public void tryLogin(String login, String pass) {
         driver.findElement(By.id("login-username")).sendKeys(login);
         driver.findElement(By.cssSelector("#login-password")).sendKeys(pass);
         driver.findElement(By.xpath("//*[@id=\"login-button\"]")).click();
@@ -32,6 +32,7 @@ public class TestNGExample {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\mozhg\\jars\\chromedriver.exe");
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10);
+        driver.get("http://at.pflb.ru/matrixboard2/");
     }
 
     @AfterTest
@@ -40,13 +41,8 @@ public class TestNGExample {
     }
 
     @Test (priority=1)
-    public void launchMatrixBoard() {
-        driver.get("http://at.pflb.ru/matrixboard2/");
-    }
-
-    @Test (priority=2)
     public void notValidLoginTest(){
-        loginTry("wrong_login", "wrong_password");
+        tryLogin("wrong_login", "wrong_password");
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#login-failed")));
         WebElement loginFailed = driver.findElement(By.cssSelector("#login-failed"));
@@ -55,9 +51,9 @@ public class TestNGExample {
         clearLogin();
     }
 
-    @Test (priority=3)
+    @Test (priority=2)
     public void validLoginTest(){
-        loginTry("user", "user");
+        tryLogin("user", "user");
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#profile span")));
         WebElement userNameContainer = driver.findElement(By.cssSelector("#profile span"));
