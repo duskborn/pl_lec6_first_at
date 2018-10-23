@@ -15,16 +15,20 @@ import org.testng.annotations.Test;
 public class TestNGExample {
     private WebDriver driver;
     private WebDriverWait wait;
+    private By usernameLocator = By.id("login-username");
+    private By passwordLocator = By.cssSelector("#login-password");
+    private By loginButtonLocator = By.xpath("//*[@id=\"login-button\"]");
+    private By loginFailedLocator = By.cssSelector("#login-failed");
 
     private void tryLogin(String login, String pass) {
-        driver.findElement(By.id("login-username")).sendKeys(login);
-        driver.findElement(By.cssSelector("#login-password")).sendKeys(pass);
-        driver.findElement(By.xpath("//*[@id=\"login-button\"]")).click();
+        driver.findElement(usernameLocator).sendKeys(login);
+        driver.findElement(passwordLocator).sendKeys(pass);
+        driver.findElement(loginButtonLocator).click();
     }
 
     private void clearLogin() {
-        driver.findElement(By.id("login-username")).clear();
-        driver.findElement(By.cssSelector("#login-password")).clear();
+        driver.findElement(usernameLocator).clear();
+        driver.findElement(passwordLocator).clear();
     }
 
     @BeforeTest
@@ -44,8 +48,8 @@ public class TestNGExample {
     public void notValidLoginTest(){
         tryLogin("wrong_login", "wrong_password");
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#login-failed")));
-        WebElement loginFailed = driver.findElement(By.cssSelector("#login-failed"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(loginFailedLocator));
+        WebElement loginFailed = driver.findElement(loginFailedLocator);
         Assert.assertEquals(loginFailed.getText(), "Неправильный логин или пароль.");
 
         clearLogin();
