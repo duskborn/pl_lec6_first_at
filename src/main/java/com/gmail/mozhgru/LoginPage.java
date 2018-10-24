@@ -32,5 +32,4 @@ public class LoginPage {
         driver.findElement(usernameLocator).clear();
         driver.findElement(passwordLocator).clear();
     }
-
 }

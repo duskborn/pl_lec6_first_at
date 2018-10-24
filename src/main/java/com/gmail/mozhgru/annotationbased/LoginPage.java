@@ -43,4 +43,5 @@ public class LoginPage extends  AbstractPage{
         txtPassword.clear();
     }
 
+    public void open(String url) {driver.get(url);}
 }
