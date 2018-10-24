@@ -1,9 +1,12 @@
 package com.gmail.mozhgru.annotationbased;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,6 +23,7 @@ public class MainPage  extends  AbstractPage{
 
     public MainPage (WebDriver driver){
         super(driver);
+        wait.until(drv -> ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete"));
     }
 
     public String getCurrentUser(){
@@ -33,9 +37,13 @@ public class MainPage  extends  AbstractPage{
     }
 
     public void tryLogOut(){
-        wait.until(drv -> logOut.isEnabled());
-        Actions actions = new Actions(driver);
-        actions.moveToElement(logOut).click(logOut).build().perform();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+//        Actions actions = new Actions(driver);
+//        actions.moveToElement(logOut).click().build().perform();
+//        JavascriptExecutor jse = (JavascriptExecutor) driver;
+//        jse.executeScript("arguments[0].scrollIntoView()", logOut);
+
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click()", logOut);
+//        logOut.click();
     }
 }

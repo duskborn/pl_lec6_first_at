@@ -1,5 +1,6 @@
 package com.gmail.mozhgru.annotationbased;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,14 +16,9 @@ public class LoginPage extends  AbstractPage{
     @FindBy(id = "login-button")
     private WebElement bttnSubmit;
 
-//
-//    public LoginPage(WebDriver driver) {
-//        this.driver = driver;
-//        driver.get("http://at.pflb.ru/matrixboard2/");
-//    }
-
     {
         driver.get("http://at.pflb.ru/matrixboard2/");
+        wait.until(drv -> ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete"));
     }
 
     public LoginPage(WebDriver driver){
