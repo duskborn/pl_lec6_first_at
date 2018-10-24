@@ -1,5 +1,6 @@
 package com.gmail.mozhgru.day7;
 
+import com.gmail.mozhgru.annotationbased.AddPersonWidget;
 import com.gmail.mozhgru.annotationbased.LoginPage;
 import com.gmail.mozhgru.annotationbased.MainPage;
 import org.openqa.selenium.WebDriver;
@@ -53,6 +54,14 @@ public class MatrixBoardTest {
         loginPage.submit();
         MainPage mainPage = new MainPage(driver);
         Assert.assertEquals(mainPage.getCurrentUser(), "admin");
-        mainPage.tryLogOut();
+        mainPage.pressAddPersonButton();
+        AddPersonWidget addPersonWidget = new AddPersonWidget(driver);
+        addPersonWidget.fillPersonLastName("Lastname");
+        addPersonWidget.fillPersonFirstName("Firstname");
+        addPersonWidget.fillPersonPatronymicName("Patronymicname");
+        addPersonWidget.fillPersonProject("HBO");
+        addPersonWidget.fillPersonExpire("08/08/2019");
+        addPersonWidget.fillPersonFuture("Lvl-up!");
+        addPersonWidget.fillPersonNickname("nick");
     }
 }

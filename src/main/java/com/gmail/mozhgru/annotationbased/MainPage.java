@@ -21,6 +21,9 @@ public class MainPage  extends  AbstractPage{
     @FindBy(css = "#logout > span")
     private WebElement logOut;
 
+    @FindBy(css = "#add-person > span.ui-button-text")
+    private WebElement addPersonButton;
+
     public MainPage (WebDriver driver){
         super(driver);
         wait.until(drv -> ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete"));
@@ -36,14 +39,16 @@ public class MainPage  extends  AbstractPage{
         return loginFailed.getText();
     }
 
-    public void tryLogOut(){
-//        Actions actions = new Actions(driver);
-//        actions.moveToElement(logOut).click().build().perform();
-//        JavascriptExecutor jse = (JavascriptExecutor) driver;
-//        jse.executeScript("arguments[0].scrollIntoView()", logOut);
-
+    public void tryPressButton(WebElement button){
         JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click()", logOut);
-//        logOut.click();
+        executor.executeScript("arguments[0].click()", button);
+    }
+
+    public void tryLogOut(){
+        tryPressButton(logOut);
+    }
+    
+    public void pressAddPersonButton(){
+        tryPressButton(addPersonButton);
     }
 }
