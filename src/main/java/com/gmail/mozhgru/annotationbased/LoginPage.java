@@ -1,19 +1,18 @@
 package com.gmail.mozhgru.annotationbased;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends  AbstractPage{
 
-    @FindBy(id= "login-username")
+    @FindBy(id = "login-username")
     private WebElement txtUsername;
 
-    @FindBy(id= "login-password")
+    @FindBy(id = "login-password")
     private WebElement txtPassword;
 
-    @FindBy(id= "login-button")
+    @FindBy(id = "login-button")
     private WebElement bttnSubmit;
 
 //

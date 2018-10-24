@@ -42,5 +42,17 @@ public class MatrixBoardTest {
         loginPage.submit();
         MainPage mainPage = new MainPage(driver);
         Assert.assertEquals(mainPage.getCurrentUser(), "user");
+        mainPage.tryLogOut();
+    }
+
+    @Test (priority=3)
+    public void adminLoginTest(){
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.fillUsername("admin");
+        loginPage.fillPassword("admin");
+        loginPage.submit();
+        MainPage mainPage = new MainPage(driver);
+        Assert.assertEquals(mainPage.getCurrentUser(), "admin");
+        mainPage.tryLogOut();
     }
 }
