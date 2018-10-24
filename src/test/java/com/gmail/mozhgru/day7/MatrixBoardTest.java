@@ -63,5 +63,6 @@ public class MatrixBoardTest {
         addPersonWidget.fillPersonExpire("08/08/2019");
         addPersonWidget.fillPersonFuture("Lvl-up!");
         addPersonWidget.fillPersonNickname("nick");
+        mainPage.tryDone();
     }
 }

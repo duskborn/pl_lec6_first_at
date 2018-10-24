@@ -24,6 +24,9 @@ public class MainPage  extends  AbstractPage{
     @FindBy(css = "#add-person > span.ui-button-text")
     private WebElement addPersonButton;
 
+    @FindBy(xpath = "/html/body/div[3]/div[3]/div/button/span[2]")
+    private WebElement doneButton;
+
     public MainPage (WebDriver driver){
         super(driver);
         wait.until(drv -> ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete"));
@@ -47,8 +50,12 @@ public class MainPage  extends  AbstractPage{
     public void tryLogOut(){
         tryPressButton(logOut);
     }
-    
+
     public void pressAddPersonButton(){
         tryPressButton(addPersonButton);
+    }
+
+    public void tryDone(){
+        tryPressButton(doneButton);
     }
 }
