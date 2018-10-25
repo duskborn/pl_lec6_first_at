@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddPersonWidget extends  AbstractPage{
 
     @FindBy(id = "person-last-name")
@@ -26,6 +29,9 @@ public class AddPersonWidget extends  AbstractPage{
 
     @FindBy(id = "person-nickname")
     private WebElement personNickname;
+
+    @FindBy(xpath = "//a[contains(@href, \"profile.jsp?person=\")]")
+    private List<WebElement> personUrl;
 
     public AddPersonWidget (WebDriver driver){
         super(driver);
@@ -57,5 +63,16 @@ public class AddPersonWidget extends  AbstractPage{
 
     public void fillPersonNickname(String nick) {
         personNickname.sendKeys(nick);
+    }
+
+    public Boolean checkUrlOfElement(String containedUrl) {
+
+        Boolean returnedBool = new Boolean(false);
+        String checkedString = new String("");
+        for(WebElement e : personUrl){
+            checkedString = e.getAttribute("href");
+            if (checkedString.contains(containedUrl)) returnedBool = true;
+        };
+        return returnedBool;
     }
 }

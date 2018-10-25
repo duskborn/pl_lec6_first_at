@@ -132,4 +132,10 @@ public class LoginPageSteps {
     public void открылсяВиджетДобавленияПользователя() {
         addPersonWidget = new AddPersonWidget(driver);
     }
+
+    @Тогда("^в коде появился элемент ведущий на страницу пользователя \"([^\"]*)\"$")
+    public void displayedNewPerson(String url) {
+        addPersonWidget = new AddPersonWidget(driver);
+        Assert.assertTrue(addPersonWidget.checkUrlOfElement(url));
+    }
 }

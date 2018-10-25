@@ -62,7 +62,8 @@ public class MatrixBoardTest {
         addPersonWidget.fillPersonProject("HBO");
         addPersonWidget.fillPersonExpire("08/08/2019");
         addPersonWidget.fillPersonFuture("Lvl-up!");
-        addPersonWidget.fillPersonNickname("nick");
+        addPersonWidget.fillPersonNickname("nick123394");
         mainPage.tryDone();
+        Assert.assertTrue(addPersonWidget.checkUrlOfElement("nick123394"));
     }
 }

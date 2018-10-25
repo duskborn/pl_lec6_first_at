@@ -57,5 +57,6 @@ public class MainPage  extends  AbstractPage{
 
     public void tryDone(){
         tryPressButton(doneButton);
+        wait.until(drv -> ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete"));
     }
 }
