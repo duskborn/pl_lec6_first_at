@@ -1,6 +1,7 @@
 package com.gmail.mozhgru.stepdefinition;
 
 import com.gmail.mozhgru.annotationbased.AbstractPage;
+import com.gmail.mozhgru.annotationbased.AddPersonWidget;
 import com.gmail.mozhgru.annotationbased.LoginPage;
 import com.gmail.mozhgru.annotationbased.MainPage;
 import cucumber.api.PendingException;
@@ -19,6 +20,7 @@ public class LoginPageSteps {
 
     private LoginPage loginPage = null;
     private MainPage mainPage = null;
+    private AddPersonWidget addPersonWidget = null;
 
     @Before
     public void setUp() {
@@ -49,6 +51,34 @@ public class LoginPageSteps {
                 loginPage.fillPassword(value);
                 break;
 
+            case "Фамилия":
+                addPersonWidget.fillPersonLastName(value);
+                break;
+
+            case "Имя":
+                addPersonWidget.fillPersonFirstName(value);
+                break;
+
+            case "Отчество":
+                addPersonWidget.fillPersonPatronymicName(value);
+                break;
+
+            case "Текущий проект":
+                addPersonWidget.fillPersonProject(value);
+                break;
+
+            case "Срок":
+                addPersonWidget.fillPersonExpire(value);
+                break;
+
+            case "План на будущее":
+                addPersonWidget.fillPersonFuture(value);
+                break;
+
+            case "Имя пользователя":
+                addPersonWidget.fillPersonNickname(value);
+                break;
+
             default:
                 throw new IllegalArgumentException("Invalid field name:" + fieldName);
         }
@@ -57,10 +87,23 @@ public class LoginPageSteps {
 
     @И("^нажимает кнопку \"([^\"]*)\"$")
     public void clickButton(String btnName) {
-        if (!btnName.equals("отправить")) {
-            throw new IllegalArgumentException("Invalid button name:" + btnName);
+        switch (btnName) {
+
+            case "отправить":
+                loginPage.submit();
+                break;
+
+            case "готово":
+                mainPage.tryDone();
+                break;
+
+            case "добавить человека":
+                mainPage.pressAddPersonButton();
+                break;
+
+            default:
+                throw new IllegalArgumentException("Invalid button name:" + btnName);
         }
-        loginPage.submit();
     }
 
     @Тогда("^открылась главная страница$")
@@ -77,5 +120,16 @@ public class LoginPageSteps {
     public void getErrorMessage(String error) {
         mainPage = new MainPage(driver);
         Assert.assertEquals(mainPage.getTextOfElement(), error);
+    }
+
+    @Пусть("^пользователь выходит из учетной записи$")
+    public void pressLogout() throws Throwable {
+        mainPage = new MainPage(driver);
+        mainPage.tryLogOut();
+    }
+
+    @Тогда("^открылся виджет добавления пользователя$")
+    public void открылсяВиджетДобавленияПользователя() {
+        addPersonWidget = new AddPersonWidget(driver);
     }
 }
