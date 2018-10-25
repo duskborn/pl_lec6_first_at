@@ -72,4 +72,10 @@ public class LoginPageSteps {
     public void checkUserName(String text) {
         Assert.assertEquals(text, mainPage.getCurrentUser());
     }
+
+    @Тогда("^появилось сообщение о неуспешном входе \"(.+)\"$")
+    public void getErrorMessage(String error) {
+        mainPage = new MainPage(driver);
+        Assert.assertEquals(mainPage.getTextOfElement(), error);
+    }
 }
